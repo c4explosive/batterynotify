@@ -40,11 +40,19 @@ int percents()
 
 int main()
 {
-    printf("Porcentaje: %d%\n",percents());
-    if(percents() > 98)
+    int rep=1;
+    while(1)
     {
-    	GdkPixbuf * img=gdk_pixbuf_new_from_file("/root/005/Dev/notify/mac-battery-recalibrate-full-battery.png",NULL); //Cambiar ruta del icono
-    	notifyB(img);
+    	printf("Porcentaje: %d%\n",percents());
+    	if(percents() >= 95 && rep)
+    	{
+    	    GdkPixbuf * img=gdk_pixbuf_new_from_file("/root/005/Dev/notify/mac-battery-recalibrate-full-battery.png",NULL); //Cambiar ruta del icono
+     	    notifyB(img);
+	    rep=0;
+    	}
+	if(percents() < 95)
+	    rep=1;
+	system("sleep 60");
     }
     return 0;
 }
